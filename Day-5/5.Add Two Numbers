@@ -1,0 +1,40 @@
+Problem Link:https://leetcode.com/problems/add-two-numbers/
+
+ListNode* addTwoNumbers(ListNode* l1, ListNode* l2) {
+        ListNode* temp = new ListNode();
+        ListNode* l3 = temp;
+        int summ = 0;
+        int carry = 0;
+        while(l1||l2){
+            summ = 0;
+            
+            if(l1){
+                summ += l1->val;
+                l1 = l1->next;
+            }
+            if(l2){
+                summ += l2->val;
+                l2 = l2->next;
+            }
+            
+            summ += carry;
+            carry = summ/10;
+            summ = summ%10;
+            
+            temp->val = summ;
+			
+            if((l1||l2)||(carry)){
+                temp->next = new ListNode(0);
+                temp = temp->next;
+            }
+        }
+		
+        if(carry){
+            summ = carry;
+            temp->val = summ;           
+        }
+        
+        temp = NULL;
+        return l3;
+
+    }

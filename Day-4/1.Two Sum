@@ -1,0 +1,20 @@
+Problem Link:https://leetcode.com/problems/two-sum/
+
+vector<int> twoSum(vector<int>& nums, int target) {
+        vector<int>v;
+        map<int,int>mp;
+        for(int i=0;i<nums.size();i++)
+        {
+            mp.insert({nums[i],i});
+        }
+        for(int i=0;i<nums.size();i++)
+        {
+            if(mp.find(target-nums[i])!=mp.end() && mp[target-nums[i]]!=i )
+            {
+                v.push_back(mp[target-nums[i]]);
+                v.push_back(i);
+                break;
+            }
+        }
+        return v;
+    }

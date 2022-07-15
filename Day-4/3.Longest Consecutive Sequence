@@ -1,0 +1,33 @@
+Problem Link:https://leetcode.com/problems/longest-consecutive-sequence/
+
+int longestConsecutive(vector<int>& nums) {
+        if(nums.size()==0)
+            return 0;
+        if(nums.size()==1)
+            return 1;
+        map<int,int>mp;
+        for(int i=0;i<nums.size();i++)
+        {
+            mp[nums[i]]=1;
+        }
+        auto it = mp.begin();
+        int temp = it->first;
+        mp.erase(temp);
+        int count=1,ans=1;
+        for(auto it:mp)
+        {
+            if(it.first==temp+1)
+            {
+                count++;
+                temp=it.first;
+            }
+            else
+            {
+                ans=max(ans,count);
+                count=1;
+                temp=it.first;
+            }
+        }
+        ans=max(ans,count);
+        return ans;
+    }
