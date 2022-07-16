@@ -1,0 +1,31 @@
+Problem Link:https://leetcode.com/problems/reverse-nodes-in-k-group/
+
+int length(ListNode* head)
+    {
+        int l=0;
+        ListNode* t=head;
+        while(t!=NULL)
+        {
+            l++;
+            t=t->next;
+        }
+        return l;
+    }
+    ListNode* reverseKGroup(ListNode* head, int k) {
+        if(head==NULL)
+            return NULL;
+        
+        if(length(head)<k)
+            return head;
+        ListNode* p=head,*q=NULL,*r=NULL;
+        for(int i=1;i<=k && p!=NULL ;i++)
+        {
+            r=q;
+            q=p;
+            p=p->next;
+            q->next=r;
+        }
+        head->next=reverseKGroup(p,k);
+        
+        return q;
+    }
