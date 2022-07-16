@@ -1,0 +1,26 @@
+Problem Link:https://leetcode.com/problems/linked-list-cycle-ii/
+
+ListNode *detectCycle(ListNode *head) {
+        ListNode* slow=head;
+        ListNode* fast=head;
+        int f=0;
+        while(fast!=NULL && (slow!=fast||f==0))
+        {
+            f=1;
+            slow=slow->next;
+            fast=fast->next;
+            if(fast)
+                fast=fast->next;
+        }
+        if(fast==NULL)
+            return NULL;
+        else
+        {
+            while(slow!=head)
+            {
+                slow=slow->next;
+                head=head->next;
+            }
+        }
+        return slow;
+    }
