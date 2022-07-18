@@ -1,0 +1,60 @@
+Problem Link:https://leetcode.com/problems/n-queens/
+
+vector<vector<string>> ans;
+    bool is_safe(int r,int c,vector<string>& t,int n)
+    {
+        for(int i=0;i<=r;i++)
+        {
+            if(t[i][c]=='Q')
+                return false;
+        }
+        int i=r,j=c;
+        while(i>=0 && j>=0)
+        {
+            if(t[i][j]=='Q')
+                return false;
+            
+            i--;
+            j--;
+        }
+        i=r,j=c;
+        while(i>=0 && j<n)
+        {
+            if(t[i][j]=='Q')
+                return false;
+            
+            i--;
+            j++;
+        }
+        return true;
+    }
+    void solve(int i,vector<string>& t,int n)
+    {
+        if(i==n)
+        {
+            ans.push_back(t);
+            return ;
+        }
+        
+        for(int k=0;k<n;k++)
+        {
+            if(is_safe(i,k,t,n))
+            {
+                t[i][k]='Q';
+                solve(i+1,t,n);
+                    
+                t[i][k]='.';
+            }
+        }
+       
+    }
+    vector<vector<string>> solveNQueens(int n) {
+        string s="";
+        for(int i=0;i<n;i++)
+        {
+            s=s+".";
+        }
+        vector<string> t(n,s);
+        solve(0,t,n);
+        return ans;
+    }

@@ -1,0 +1,33 @@
+Problem Link:https://practice.geeksforgeeks.org/problems/m-coloring-problem-1587115620/1#
+
+bool is_safe(int node,int c,bool graph[101][101],int n,vector<int>& color)
+    {
+        for(int i=0;i<n;i++)
+        {
+            if(graph[node][i]==true && color[i]==c)
+            return false;
+        }
+        return true;
+    }
+    bool solve(bool graph[101][101],int node,int m,int n,vector<int>& color)
+    {
+        if(node==n)
+        return true;
+       
+        for(int c=1;c<=m;c++)
+        {
+            if(is_safe(node,c,graph,n,color))
+            {
+                color[node]=c;
+                if(solve(graph,node+1,m,n,color))
+                return true;
+                color[node]=0;
+            }
+        }
+        return false;
+    }
+    bool graphColoring(bool graph[101][101], int m, int n) {
+        // your code here
+        vector<int> color(n,0);
+        return solve(graph,0,m,n,color);
+    }
