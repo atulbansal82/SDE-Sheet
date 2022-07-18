@@ -1,0 +1,30 @@
+Problem Link:https://leetcode.com/problems/set-matrix-zeroes/
+
+void setZeroes(vector<vector<int>>& matrix) {
+        multiset<pair<int,int>> s;
+        for(int i=0;i<matrix.size();i++)
+        {
+            for(int j=0;j<matrix[0].size();j++)
+            {
+                if(matrix[i][j]==0)
+                {
+                    s.insert({i,1});
+                    s.insert({j,2});
+                }
+            }
+        }
+        
+        for(auto i:s)
+        {
+            if(i.second==1)
+            {
+                for(int j=0;j<matrix[0].size();j++)
+                    matrix[i.first][j]=0;
+            }
+            else
+            {
+                for(int j=0;j<matrix.size();j++)
+                    matrix[j][i.first]=0;
+            }
+        }
+    }
