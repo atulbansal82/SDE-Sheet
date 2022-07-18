@@ -1,0 +1,28 @@
+Problem Link:https://www.codingninjas.com/codestudio/problems/1062658?topList=striver-sde-sheet-problems&utm_source=striver&utm_medium=website&leftPanelTab=0
+
+bool sortbysec(pair<int,int> a, pair<int,int> b)
+{
+    return (a.second<b.second);
+}
+   
+vector<int> maximumMeetings(vector<int> &start, vector<int> &end) {
+    // Write your code here.
+    vector<pair<int,int>> v;
+    int n=start.size();
+    for(int i=0; i<n ;i++)
+        v.push_back(make_pair(i,end[i]));
+    
+    stable_sort(v.begin(),v.end(), sortbysec);
+    
+    int endt=-1;
+    vector<int> res;
+    for(int i=0;i<n;i++)
+    {
+        if(start[v[i].first]>endt)
+        {
+            res.push_back(v[i].first+1);
+            endt=v[i].second;
+        }
+    } 
+    return res;
+}
