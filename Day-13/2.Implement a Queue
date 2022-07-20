@@ -1,0 +1,46 @@
+Problem Link:https://www.codingninjas.com/codestudio/problems/2099908?topList=striver-sde-sheet-problems&utm_source=striver&utm_medium=website
+
+class Queue {
+public:
+    int f;
+    int rear;
+    int* arr;
+    int size;
+    Queue() {
+        // Implement the Constructor
+        size=50001;
+        arr = new int[size];
+        f=-1;
+        rear=-1;
+    }
+
+    bool isEmpty() {
+        // Implement the isEmpty() function
+        if(f==rear)
+            return true;
+       
+        return false;
+    }
+
+    void enqueue(int data) {
+        // Implement the enqueue() function
+        arr[++rear]=data;
+    }
+
+    int dequeue() {
+        // Implement the dequeue() function
+        if(isEmpty())
+            return -1;
+       
+        return arr[++f];
+       
+    }
+
+    int front() {
+        // Implement the front() function
+        if(isEmpty())
+            return -1;
+       
+        return arr[f+1];
+    }
+};
