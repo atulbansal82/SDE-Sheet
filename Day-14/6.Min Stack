@@ -1,0 +1,30 @@
+Problem Link:https://leetcode.com/problems/min-stack/
+
+    vector<int>v;
+    int t=-1;
+    vector<int>a;
+    MinStack() {
+       vector<int>n(30000);
+        v=n;
+    }
+    
+    void push(int val) {
+        t++;
+        v[t]=val;
+        if(a.size()==0 || a[a.size()-1]>=val)
+            a.push_back(val);
+    }
+    
+    void pop() {
+        if(v[t]==a[a.size()-1])
+            a.pop_back();
+        t--;  
+    }
+    
+    int top() {
+        return v[t];
+    }
+    
+    int getMin() {
+        return a[a.size()-1];
+    }
