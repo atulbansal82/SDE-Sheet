@@ -1,0 +1,30 @@
+Problem Link:https://www.codingninjas.com/codestudio/problems/1115738?topList=striver-sde-sheet-problems&utm_source=striver&utm_medium=website&leftPanelTab=0
+
+
+vector<int> stringMatch(string &str, string &pat) {
+    // Write your code here
+    vector<int> ans;
+    int start=0;
+    
+    int i=0,j=0;
+    while(i<str.length())
+    {
+        if(str[i]==pat[j])
+        {
+            i++;
+            j++;
+            if(j>=pat.length())
+            {
+                ans.push_back(i-j);
+                i=i-j+1;
+                j=0;
+            }
+        }
+        else
+        {
+            i=i-j+1;
+            j=0;
+        }  
+    }
+    return ans;
+}

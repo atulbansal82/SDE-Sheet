@@ -1,0 +1,44 @@
+Problem Link:https://leetcode.com/problems/string-to-integer-atoi/
+
+int myAtoi(string s) {
+     long long int ans=0,d =1,digit=-1;
+     
+    for(int i=0;i<s.size();i++)
+    {  
+        if(isdigit(s[i])) 
+        {
+            ans = ans*10 + s[i] - '0';
+            digit = 0;
+            if (ans>INT_MAX) break;
+        }
+        
+        else if(digit==-1)
+        {
+            if(s[i] == '-')
+            {
+                d = -1;
+                digit=0;
+            }
+            
+            else if(s[i] == '+')
+            {
+                digit=0;
+            }
+            
+            else if(s[i] ==' ') 
+                continue;
+            
+            else break;
+        }
+        
+        else if(digit==0 && !isdigit(s[i]))
+        {
+                break;
+        }
+    }
+        
+    ans *= d;
+    if(ans<INT_MIN) ans = INT_MIN;
+    else if(ans>INT_MAX) ans = INT_MAX;
+    return ans;
+    }
