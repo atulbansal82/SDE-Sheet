@@ -1,0 +1,23 @@
+Problem Link:https://www.codingninjas.com/codestudio/problems/893000?topList=striver-sde-sheet-problems&utm_source=striver&utm_medium=website&leftPanelTab=0
+
+int minCharsforPalindrome(string str) {
+	// Write your code here.
+    int i=0,j=str.size()-1;
+    int ans=0;
+    while(i<j)
+    {
+        if(str[i]==str[j])
+        {
+            i++;
+            j--;
+        }
+        else
+        {
+            j=j+i;
+            ans=str.size()-j;
+            j--;
+            i=0;
+        }
+    }
+    return ans;
+}

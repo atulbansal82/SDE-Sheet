@@ -1,0 +1,35 @@
+Problem Link:https://www.codingninjas.com/codestudio/problems/1112619?topList=striver-sde-sheet-problems&utm_source=striver&utm_medium=website&leftPanelTab=0
+
+int zAlgorithm(string h, string n, int l, int m)
+{
+	// Write your code here
+        int i=0,j=0;
+        int ans=0;
+        if(n.size()==0)
+            return 0;
+        while(i<h.size())
+        {
+            if(h[i]==n[j])
+            {
+                while(j<n.size())
+                {
+                    if(h[i]==n[j])
+                    {
+                        i++;
+                        j++;
+                    }
+                    else
+                        break;
+                }
+                if(j==n.size())
+                    ans++;
+                if(i==l)
+                    return ans;
+                i=i-j+1;
+                j=0;
+            }
+            else
+                i++;
+        }
+        return ans;
+}

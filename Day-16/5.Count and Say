@@ -1,0 +1,32 @@
+Problem Link:https://leetcode.com/problems/count-and-say/
+
+    string countAndSay(int n) {
+        if(n==1)
+            return "1";
+        if(n==2)
+            return "11";
+        n=n-2;
+        string str="11";
+        while(n--)
+        {
+            int i=0;
+            int ans=0;
+            string s="";
+            while(i<str.size())
+            {
+                if(i<str.size()-1 && str[i]==str[i+1])
+                {
+                    ans++;
+                    i++;
+                }
+                else
+                {
+                    s=s+to_string(ans+1)+(str[i]);
+                    ans=0;
+                    i++;
+                }
+            }
+            str=s;
+        }
+        return str;
+    }

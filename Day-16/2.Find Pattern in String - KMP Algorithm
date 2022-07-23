@@ -1,0 +1,42 @@
+Problem Link:https://www.codingninjas.com/codestudio/problems/1112621?topList=striver-sde-sheet-problems&utm_source=striver&utm_medium=website
+
+void find_lps(vector<int> &lps, string p)
+{
+    lps[0] = 0;
+    int len = 0;
+    for (int i=1;i<lps.size();i++)
+    {
+        while (len>0 && p[i] != p[len])
+            len = lps[len-1];
+        if (p[i] == p[len])
+            len++;
+        lps[i] = len;
+    }
+}
+
+bool findPattern(string p, string s)
+{
+    int m = p.length();
+    int n = s.length();
+    vector<int>lps(m,0);
+    find_lps(lps,p);
+    int i=0,j=0;
+    while(i<n)
+    {
+        if(s[i]==p[j])
+        {
+            i++;
+            j++;
+        }
+        else
+        {
+            if(j!=0)
+                j=lps[j-1];
+            else
+                i++;
+        }
+        if(j==p.size())
+            return true;
+    }
+    return false;
+}
