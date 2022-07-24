@@ -1,0 +1,14 @@
+Problem Link:https://leetcode.com/problems/binary-tree-postorder-traversal/
+
+    void solve(TreeNode* root,vector<int>&res)
+    {
+        if(!root)return;
+        solve(root->left,res);
+        solve(root->right,res);
+        res.push_back(root->val);
+    }
+    vector<int> postorderTraversal(TreeNode* root) {
+        vector<int>res;
+        solve(root,res);
+        return res;
+    }

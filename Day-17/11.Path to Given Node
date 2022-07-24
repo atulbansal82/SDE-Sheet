@@ -1,0 +1,24 @@
+Problem Link:https://www.interviewbit.com/problems/path-to-given-node/
+
+vector<int>v;
+void sol(TreeNode* A, int B,vector<int>ans)
+{
+    if(!A)
+    return ;
+    
+    if(A->val==B)
+    {
+        ans.push_back(B);
+        v=ans;
+        return;
+    }
+    
+    ans.push_back(A->val);
+    sol(A->left,B,ans);
+    sol(A->right,B,ans);
+}
+vector<int> Solution::solve(TreeNode* A, int B) {
+    vector<int>ans;
+    sol(A,B,ans);
+    return v;
+}
