@@ -1,0 +1,17 @@
+Problem Link:https://leetcode.com/problems/diameter-of-binary-tree/
+
+    int solve(TreeNode* root)
+    {
+        if(!root)
+            return 0;
+        return max(solve(root->left),solve(root->right))+1;
+    }
+    int diameterOfBinaryTree(TreeNode* root) {
+        if(!root)
+            return 0;
+        int val=solve(root->left)+solve(root->right);
+        int l=diameterOfBinaryTree(root->left);
+        int r=diameterOfBinaryTree(root->right);
+        
+        return max(val,max(l,r));
+    }
