@@ -1,0 +1,34 @@
+Problem Link:https://leetcode.com/problems/construct-binary-search-tree-from-preorder-traversal/
+
+    TreeNode* bstFromPreorder(vector<int>& preorder) {
+        stack<TreeNode*>st;
+        int i=0;
+        TreeNode* root=new TreeNode(preorder[i++]);
+        TreeNode* p=root;
+        TreeNode* t;
+        while(i<preorder.size())
+        {
+            if(preorder[i]<p->val)
+            {
+                t=new TreeNode(preorder[i++]);
+                p->left=t;
+                st.push(p);
+                p=t;
+            }
+            else
+            {
+                if(st.size()==0 || st.top()->val>preorder[i])
+                {
+                   t=new TreeNode(preorder[i++]);
+                   p->right=t;
+                   p=t; 
+                }
+                else
+                {
+                    p=st.top();
+                    st.pop();
+                }
+            }
+        }
+        return root;
+    }
