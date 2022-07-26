@@ -1,0 +1,17 @@
+Problem Link:https://leetcode.com/problems/binary-tree-maximum-path-sum/
+
+int solve(TreeNode* root,int &res)
+    { 
+        if(root==NULL) 
+            return 0;
+        int ls = solve(root->left,res);
+        int rs = solve(root->right,res);
+        int temp = max(max(ls,rs)+root->val,root->val);
+        res = max({res,temp,ls+rs+root->val});
+        return temp;
+    }
+    int maxPathSum(TreeNode* root) {
+        int res = INT_MIN;
+        solve(root,res);
+        return res;
+    }

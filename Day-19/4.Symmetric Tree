@@ -1,0 +1,21 @@
+Problem Link:https://leetcode.com/problems/symmetric-tree/
+
+        bool abc(TreeNode* p, TreeNode* q)
+        {
+            if(!p && !q) 
+                return true;
+            else if(!p || !q) 
+                return false;
+            if(p->val!=q->val) 
+                return false;
+            if(!(abc(p->left, q->right) && abc(p->right, q->left)))
+                return false;
+            
+            return true;
+        }
+        bool isSymmetric(TreeNode* root) 
+        {
+           if(!root) 
+               return true;
+           return abc(root->left, root->right); 
+        }
