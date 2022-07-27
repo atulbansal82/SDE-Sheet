@@ -1,0 +1,27 @@
+Problem Link:https://leetcode.com/problems/two-sum-iv-input-is-a-bst/
+
+    void solve(TreeNode* root,map<int,int>&mp,int k,int &flag)
+    {
+        if(!root)
+            return ;
+        int x=k-root->val;
+        if(mp.find(x)!=mp.end())
+        {
+            flag=1;
+            exit;
+        }
+        mp[root->val]++;
+        solve(root->left,mp,k,flag);
+        solve(root->right,mp,k,flag);
+    }
+    bool findTarget(TreeNode* root, int k) {
+        if(!root->left && !root->right)
+            return false;
+        map<int,int>mp;
+        int flag=0;
+        solve(root,mp,k,flag);
+        if(flag==1)
+            return true;
+        else
+            return false;
+    }

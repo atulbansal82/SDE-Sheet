@@ -1,0 +1,25 @@
+practice Link:https://leetcode.com/problems/binary-search-tree-iterator/
+
+   vector<int> arr;
+    int x = 0;
+    
+    void inorder(TreeNode* root)
+    {
+        if(root == nullptr){
+            return ;
+        }
+        inorder(root -> left);
+        arr.push_back(root -> val);
+        inorder(root -> right);
+    }
+    BSTIterator(TreeNode* root) {
+        inorder(root);
+    }
+    
+    int next() {
+        return arr[x++];
+    }
+    
+    bool hasNext() {
+        return x < arr.size();
+    }
