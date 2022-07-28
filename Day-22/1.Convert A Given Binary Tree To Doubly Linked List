@@ -1,0 +1,20 @@
+Problem Link:https://www.codingninjas.com/codestudio/problems/893106?topList=striver-sde-sheet-problems&utm_source=striver&utm_medium=website&leftPanelTab=0
+
+void solve(BinaryTreeNode<int>* root,BinaryTreeNode<int>*& prev)
+{
+    if(!root)
+        return;
+    solve(root->left,prev);
+    BinaryTreeNode<int>* temp=new BinaryTreeNode<int>(root->data);
+    prev->right=temp;
+    temp->left=prev;
+    prev=temp;
+    solve(root->right,prev);
+}
+BinaryTreeNode<int>* BTtoDLL(BinaryTreeNode<int>* root) {
+    // Write your code here
+    BinaryTreeNode<int>* ans=new BinaryTreeNode<int>(0);
+    BinaryTreeNode<int>* prev=ans;
+    solve(root,prev);
+    return ans->right;
+}

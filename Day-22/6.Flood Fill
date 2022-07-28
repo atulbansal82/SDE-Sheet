@@ -1,0 +1,20 @@
+Problem Link:https://leetcode.com/problems/flood-fill/
+
+    void solve(vector<vector<int>>& image, int i, int j, int c,int temp)
+    {
+        if(i>=image.size() || i<0 || j>=image[0].size() || j<0 || image[i][j]==c)
+            return ;
+        
+        if(image[i][j]!=temp)
+            return;
+        image[i][j]=c;
+        
+        solve(image,i+1,j,c,temp);
+        solve(image,i-1,j,c,temp);
+        solve(image,i,j+1,c,temp);
+        solve(image,i,j-1,c,temp);
+    }
+    vector<vector<int>> floodFill(vector<vector<int>>& image, int sr, int sc, int color) {
+        solve(image,sr,sc,color,image[sr][sc]);
+        return image;
+    }
