@@ -1,0 +1,37 @@
+Problem Link:https://leetcode.com/problems/course-schedule/
+
+    bool iscycle(int s,int parent,vector<int>&vis,vector<int>adj[],vector<int>&dfsvis)
+    {
+        vis[s]=1;
+        dfsvis[s]=1;
+        for(auto it:adj[s])
+        {
+            if(vis[it]==0)
+            {
+                if(iscycle(it,s,vis,adj,dfsvis))
+                    return true;
+            }
+            else if(dfsvis[it]==1)
+                return true;
+        }
+        dfsvis[s]=0;
+        return false;
+    }
+    bool canFinish(int n, vector<vector<int>>& p) {
+        vector<int>adj[n];
+        for(int i=0;i<p.size();i++)
+        {
+            adj[p[i][0]].push_back(p[i][1]);
+        }
+        vector<int>vis(n,0);
+        vector<int>dfsvis(n,0);
+        for(int i=0;i<n;i++)
+        {
+            if(vis[i]==0)
+            {
+                if(iscycle(i,-1,vis,adj,dfsvis))
+                    return false;
+            }
+        }
+        return true;
+    }

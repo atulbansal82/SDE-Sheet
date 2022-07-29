@@ -1,0 +1,38 @@
+Problem Link:https://takeuforward.org/interviews/strivers-sde-sheet-top-coding-interview-problems/
+
+#include<bits/stdc++.h>
+bool iscycle(int s,int parent,vector<int>&vis,vector<int>adj[])
+{
+    vis[s]=1;
+    for(auto it:adj[s])
+    {
+        if(vis[it]==0)
+        {
+            if(iscycle(it,s,vis,adj))
+                return true;
+        }
+        else if(it!=parent)
+            return true;
+    }
+    return false;
+}
+string cycleDetection (vector<vector<int>>& edge, int n, int m)
+{
+    // Write your code here.
+        vector<int>adj[n+1];
+        for(int i=0;i<m;i++)
+        {
+            adj[edge[i][0]].push_back(edge[i][1]);
+            adj[edge[i][1]].push_back(edge[i][0]);
+        }
+        vector<int>vis(n+1,0);
+        for(int i=1;i<=n;i++)
+        {
+            if(vis[i]==0)
+            {
+                if(iscycle(i,-1,vis,adj))
+                    return "Yes";
+            }
+        }
+        return "No";
+}

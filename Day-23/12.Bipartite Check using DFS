@@ -1,0 +1,33 @@
+Problem Link:https://takeuforward.org/interviews/strivers-sde-sheet-top-coding-interview-problems/
+
+bool dfs(int temp,vector<int>&color,vector<vector<int>> adj)
+    {
+        if(color[temp]==-1)
+            color[temp]=1;
+        for(auto it:adj[temp])
+        {
+            if(color[it]==-1)
+            {
+                color[it]=1-color[temp];
+                if(!dfs(it,color,adj))
+                    return false;
+            }
+            else if(color[it]==color[temp])
+                return false;
+        }
+        return true;
+    }
+    bool isBipartite(vector<vector<int>>& graph) 
+    {
+        int n=graph.size();
+        vector<int>color(n,-1);
+        for(int i=0;i<n;i++)
+        {
+            if(color[i]==-1)
+            {
+                if(!dfs(i,color,graph))
+                  return false;  
+            }
+        }
+        return true;
+    }
