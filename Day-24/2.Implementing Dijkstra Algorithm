@@ -1,0 +1,27 @@
+Problem Link:https://practice.geeksforgeeks.org/problems/implementing-dijkstra-set-1-adjacency-matrix/1
+
+    vector <int> dijkstra(int V, vector<vector<int>> adj[], int s)
+    {
+        // Code here
+        queue<int>q;
+        vector<int>disto(V+1,INT_MAX);
+        disto[s]=0;
+        q.push(s);
+        
+        while(!q.empty())
+        {
+            int par=q.front();
+            q.pop();
+            for(auto it:adj[par])
+            {
+                int next=it[0];
+                int next_dis=it[1];
+                if(disto[next]>disto[par]+next_dis)
+                {
+                    disto[next]=disto[par]+next_dis;
+                    q.push(next);
+                }
+            }
+        }
+        return disto;
+    }

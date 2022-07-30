@@ -1,0 +1,64 @@
+Problem Link:https://practice.geeksforgeeks.org/problems/minimum-spanning-tree/1
+
+    int findpar(int node,vector<int>& parent)
+    {
+       if(node==parent[node])
+       return node;
+       
+       return parent[node]=findpar(parent[node],parent);
+    }
+    void Union(int u,int v,vector<int>& parent,vector<int>& rank)
+    {
+       u=findpar(u,parent);
+       v=findpar(v,parent);
+       if(rank[u]<rank[v])
+       {
+           parent[u]=v;
+       }
+       else if(rank[u]>rank[v])
+       {
+           parent[v]=u;
+       }
+       else
+       {
+           parent[v]=u;
+           rank[u]++;
+       }
+    }
+    static bool cmp(vector<int> &first, vector<int> &second)
+    {
+       return first[2] < second[2];
+    }
+    int spanningTree(int V, vector<vector<int>> adj[])
+    {
+        vector<vector<int>> edges;
+        for(int u = 0; u < V; u++)
+        {
+            for(auto &it : adj[u])
+            {
+                int v = it[0], wt = it[1];
+               
+                edges.push_back({u, v, wt});
+            }
+        }
+       
+       
+        sort(edges.begin(), edges.end(), cmp);
+        int ans=0;
+       
+        vector<int> parent(V);
+        for(int i=0;i<V;i++)
+        parent[i]=i;
+       
+        vector<int> rank(V,0);
+        for(auto i:edges)
+        {
+            int u=i[0],v=i[1],w=i[2];
+            if(findpar(u,parent)!=findpar(v,parent))
+            {
+                ans+=w;
+                Union(u,v,parent,rank);
+            }
+        }
+        return ans;
+    }

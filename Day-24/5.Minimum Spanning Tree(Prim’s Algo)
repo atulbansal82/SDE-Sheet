@@ -1,0 +1,30 @@
+Problem Link:https://practice.geeksforgeeks.org/problems/minimum-spanning-tree/1
+
+int spanningTree(int v, vector<vector<int>> adj[])
+    {
+        // code here
+        int ans=0;
+        vector<int>vis(v,0);
+        priority_queue<pair<int,int>,vector<pair<int,int>>,greater<pair<int,int>>>pq;
+        pq.push({0,0});
+        while(!pq.empty())
+        {
+            int to=pq.top().second;
+            int w=pq.top().first;
+            pq.pop();
+            
+            if(vis[to]==1)
+            continue;
+            
+            vis[to]=1;
+            ans=ans+w;
+            for(auto it:adj[to])
+            {
+                if(vis[it[0]]==0)
+                {
+                    pq.push({it[1],it[0]});
+                }
+            }
+        }
+        return ans;
+    }
