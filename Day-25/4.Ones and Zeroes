@@ -1,0 +1,22 @@
+Problem Link:https://leetcode.com/problems/ones-and-zeroes/
+
+    int solve(vector<string>& strs, int m, int n,int i,vector<vector<vector<int>>>& dp)
+    {
+        if(i==strs.size())
+            return 0;
+        
+        int zero=count(strs[i].begin(),strs[i].end(),'0');
+        int one=strs[i].size()-zero;
+        
+        if(dp[i][m][n]!=-1)
+            return dp[i][m][n];
+        
+        if(m-zero>=0 && n-one>=0)
+            return dp[i][m][n]=max(1+solve(strs,m-zero,n-one,i+1,dp),solve(strs,m,n,i+1,dp));
+        else
+            return dp[i][m][n]=solve(strs,m,n,i+1,dp);
+    }
+    int findMaxForm(vector<string>& strs, int m, int n) {
+        vector<vector<vector<int>>>dp(strs.size()+1,vector<vector<int>>(m+1,vector<int>(n+1,-1)));
+        return solve(strs,m,n,0,dp);
+    }

@@ -1,0 +1,25 @@
+Problem Link:https://leetcode.com/problems/edit-distance/
+
+int solve(int n,int m,string word1,string word2,vector<vector<int>>& dp)
+    {
+        if(n==0)
+            return m;
+        if(m==0)
+            return n;
+        
+        if(dp[n][m]!=-1)
+            return dp[n][m];
+        
+        if(word1[n-1]==word2[m-1])
+            return dp[n][m] = solve(n-1,m-1,word1,word2,dp);
+        
+        int del=solve(n-1,m,word1,word2,dp);
+        int ins=solve(n,m-1,word1,word2,dp);
+        int rep=solve(n-1,m-1,word1,word2,dp);
+        
+        return dp[n][m] = 1+min({del,ins,rep});
+    }
+    int minDistance(string word1, string word2) {
+        vector<vector<int>> dp(word1.length()+1,vector<int>(word2.length()+1,-1));
+        return solve(word1.length(),word2.length(),word1,word2,dp);
+    }
