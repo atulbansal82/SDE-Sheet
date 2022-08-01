@@ -1,0 +1,32 @@
+Problem Link:https://leetcode.com/problems/partition-equal-subset-sum/
+
+int solve(int n,int k,vector<int> &arr,vector<vector<int>> &dp)
+{
+    if(k==0)
+        return 1;
+    if(n==-1)
+        return 0;
+    
+    if(dp[n][k]!=-1)
+        return dp[n][k];
+    if(arr[n]<=k)
+        return dp[n][k]= solve(n-1,k-arr[n],arr,dp)||solve(n-1,k,arr,dp);
+    else
+        return dp[n][k]= solve(n-1,k,arr,dp);
+}
+bool canPartition(vector<int>& arr) {
+    int n=arr.size();
+    int sum=0;
+    for(int i=0;i<n;i++)
+    {
+        sum+=arr[i];
+    }
+    if(sum%2!=0)
+        return false;
+    int k=sum/2;
+    vector<vector<int>>dp(n,vector<int>(k+1,-1));
+    int ans = solve(n-1,k,arr,dp);
+    if(ans==1)
+        return true;
+    return false;
+}

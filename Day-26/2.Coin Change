@@ -1,0 +1,22 @@
+Problem Link:https://leetcode.com/problems/coin-change/
+
+    int solve(vector<int>& wt, int w, int n, vector<vector<int>>& dp)
+    {
+        if (n==0 || w==0)
+            return (w==0) ? 0 : INT_MAX - 1;
+        
+        if (dp[w][n] != -1)
+            return dp[w][n];
+			
+        if (wt[n - 1] > w) 
+            return dp[w][n] = solve(wt, w, n-1, dp);
+        else 
+            return dp[w][n] = min(solve(wt, w, n-1, dp), 1+solve(wt, w-wt[n-1], n, dp));
+    }
+    
+    int coinChange(vector<int>& coins, int amount) 
+    {    
+        vector<vector<int>>dp(amount+1,vector<int>(coins.size()+1,-1));
+        int ans=solve(coins,amount,coins.size(),dp);
+        return (ans==INT_MAX-1)?-1:ans;
+    }

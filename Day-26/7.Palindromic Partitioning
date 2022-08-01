@@ -1,0 +1,41 @@
+Problem Link:https://practice.geeksforgeeks.org/problems/palindromic-patitioning4845/1
+
+bool is_pali(int s,int e,string str)
+    {
+        while(s<=e)
+        {
+            if(str[s]==str[e])
+            {
+                s++;
+                e--;
+            }
+            else
+            return false;
+        }
+        return true;
+    }
+    int solve(int i,int j,string str,vector<vector<int>>& dp)
+    {
+        if(i>=j)
+        return 0;
+        
+        if(dp[i][j]!=-1)
+        return dp[i][j];
+        
+        if(is_pali(i,j,str))
+        return 0;
+        
+        int ans=INT_MAX;
+        for(int k=i;k<=j-1;k++)
+        {
+            int c1=dp[i][k]==-1?dp[i][k]=solve(i,k,str,dp):dp[i][k];
+            int c2=dp[k+1][j]==-1?dp[k+1][j]=solve(k+1,j,str,dp):dp[k+1][j];
+            ans=min(ans,1+c1+c2);
+        }
+        return dp[i][j] = ans;
+    }
+    int palindromicPartition(string str)
+    {
+        vector<vector<int>> dp(str.size(),vector<int>(str.size(),-1));
+        return solve(0,str.size()-1,str,dp);
+    }
